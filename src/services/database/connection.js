@@ -1,14 +1,10 @@
 import config from './config';
-import schema from './schema';
+import applySchema from './schema';
 
-const connection = indexedDB.open(config.databaseName, config.databaseVersion);
+const {databaseName, databaseVersion} = config;
+const connection = indexedDB.open(databaseName, databaseVersion);
 
-connection.onupgradeneeded = event => {
-  console.warn('--- onupgradeneeded ---');
-  console.log(event);
-  const {oldVersion, newVersion} = event;
-  schema.runMigrations(oldVersion, newVersion);
-};
+connection.onupgradeneeded = applySchema;
 
 connection.onerror = event => {
   console.warn('--- onerror ---');
@@ -18,4 +14,5 @@ connection.onerror = event => {
 connection.onsuccess = event => {
   console.warn('--- onsuccess ---');
   console.log(event);
+  console.log('connection :', connection);
 };

@@ -1,31 +1,24 @@
 import migrations from './migrations';
 
-function Schema() {
-  function runMigrations(oldVersion, newVersion) {
-    let nextVersion = oldVersion + 1;
+function applySchema(connectionEvent) {
+  const {oldVersion, newVersion, target: {result: db}} = connectionEvent;
 
-    while (nextVersion <= newVersion) {
-      applyMigration(nextVersion);
-      nextVersion++;
-    }
+  let nextVersion = oldVersion + 1;
+
+  while (nextVersion <= newVersion) {
+    applyMigration(db, nextVersion);
+    nextVersion++;
   }
-
-  function applyMigration(version) {
-    const migration = getMigration(version);
-    migration();
-  }
-
-  function getMigration(version) {
-    const m = migrations;
-    debugger;
-    return migrations[version];
-  }
-
-  return {
-    runMigrations,
-  };
 }
 
-const instance = new Schema();
+function applyMigration(db, version) {
+  const migration = getMigration(version);
+  migration(db);
+}
 
-export default instance;
+function getMigration(version) {
+  const versionIndex = version - 1;
+  return migrations[versionIndex];
+}
+
+export default applySchema;

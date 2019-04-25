@@ -1,4 +1,6 @@
+import migrations from './migrations';
+
 export default {
   databaseName: 'todo-groups',
-  databaseVersion: 1,
+  databaseVersion: migrations.length,
 };
