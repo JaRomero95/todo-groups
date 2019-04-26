@@ -1,3 +1,3 @@
 import './connection';
 
-// TODO check if indexedDB is available
+// TODO: check if indexedDB is available

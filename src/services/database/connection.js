@@ -1,18 +1,29 @@
 import config from './config';
 import applySchema from './schema';
 
-const {databaseName, databaseVersion} = config;
-const connection = indexedDB.open(databaseName, databaseVersion);
+let database;
 
-connection.onupgradeneeded = applySchema;
+function handleConnection(resolve, reject) {
+  if (database) {
+    resolve(database);
+    return;
+  }
 
-connection.onerror = event => {
-  console.warn('--- onerror ---');
-  console.log(event);
-};
+  const {databaseName, databaseVersion} = config;
+  const connection = indexedDB.open(databaseName, databaseVersion);
 
-connection.onsuccess = event => {
-  console.warn('--- onsuccess ---');
-  console.log(event);
-  console.log('connection :', connection);
-};
+  connection.onupgradeneeded = applySchema;
+
+  connection.onerror = reject; // TODO: notify errors to user
+
+  connection.onsuccess = event => {
+    database = event.target.result;
+    resolve(database);
+  };
+}
+
+function getConnection() {
+  return new Promise(handleConnection);
+}
+
+export default getConnection;
