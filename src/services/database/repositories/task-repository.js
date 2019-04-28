@@ -1,3 +1,3 @@
 import {repositoryFactory} from '../functions';
 
-export default repositoryFactory('groups');
+export default repositoryFactory('tasks');
