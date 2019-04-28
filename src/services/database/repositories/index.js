@@ -1,5 +1,7 @@
-import groupRepository from './group-repository';
-import taskRepository from './task-repository';
+import repositoryFactory from './repository';
+
+const groupRepository = repositoryFactory('groups');
+const taskRepository = repositoryFactory('tasks');
 
 export {
   groupRepository,
