@@ -1,9 +1,15 @@
 <template>
   <div>
-    <h1>Groups</h1>
+    <h1>Groups list</h1>
+
+    <div>
+      <router-link :to="{name: 'groups-create'}">
+        New
+      </router-link>
+    </div>
 
     <div v-if="loading">
-      Cargando...
+      Loading...
     </div>
 
     <div v-else>
