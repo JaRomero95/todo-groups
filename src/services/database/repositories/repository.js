@@ -40,7 +40,7 @@ async function getAll(storeName) {
     const transaction = await openTransaction(storeName);
     const request = transaction.getAll();
 
-    request.onsuccess = async event => resolve(event.target.result);
+    request.onsuccess = event => resolve(event.target.result);
 
     request.onerror = reject;
   });

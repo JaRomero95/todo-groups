@@ -1,13 +1,5 @@
 <template>
   <div>
-    <h1>Groups create</h1>
-
-    <div>
-      <router-link :to="{name: 'groups-list'}">
-        Back
-      </router-link>
-    </div>
-
     <form @submit.prevent="createGroup">
       <div>
         <label for="name">Name</label>

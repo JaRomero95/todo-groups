@@ -1,20 +1,12 @@
 <template>
   <div>
-    <h1>Groups show</h1>
-
-    <div>
-      <router-link :to="{name: 'groups-list'}">
-        Back
-      </router-link>
-    </div>
-
-    <div v-if="loading">
-      Loading...
-    </div>
+    <app-loading v-if="loading" />
 
     <div v-else>
       <div v-if="group">
-        <h2>{{group.name}}</h2>
+        <h2 class="headline">
+          {{group.name}}
+        </h2>
       </div>
 
       <div v-else>
