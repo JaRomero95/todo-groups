@@ -1,5 +1,4 @@
 import GroupsIndex from '@/pages/GroupsIndex.vue';
-import GroupsCreate from '@/pages/GroupsCreate.vue';
 import GroupsShow from '@/pages/GroupsShow.vue';
 
 const generateBreadcrumbs = breadcrumbs => [
@@ -16,16 +15,6 @@ export default [
     name: 'groups-index',
     component: GroupsIndex,
     meta: {
-    },
-  },
-  {
-    path: '/groups/create',
-    name: 'groups-create',
-    component: GroupsCreate,
-    meta: {
-      breadcrumbs: generateBreadcrumbs([
-        {text: 'Create group'},
-      ]),
     },
   },
   {
