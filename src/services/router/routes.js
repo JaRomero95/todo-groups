@@ -1,5 +1,5 @@
-import GroupsIndex from '@/pages/GroupsIndex.vue';
-import GroupsShow from '@/pages/GroupsShow.vue';
+import GroupIndex from '@/pages/GroupIndex.vue';
+import GroupShow from '@/pages/GroupShow.vue';
 
 const generateBreadcrumbs = breadcrumbs => [
   {
@@ -13,14 +13,14 @@ export default [
   {
     path: '/groups',
     name: 'groups-index',
-    component: GroupsIndex,
+    component: GroupIndex,
     meta: {
     },
   },
   {
     path: '/groups/show/:id',
     name: 'groups-show',
-    component: GroupsShow,
+    component: GroupShow,
     meta: {
       breadcrumbs: generateBreadcrumbs([
         {text: 'Show group'},
