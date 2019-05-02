@@ -4,9 +4,21 @@
 
     <div v-else>
       <div v-if="group">
-        <h2 class="headline">
+        <h2
+          v-if="!editing"
+          class="headline"
+        >
           {{group.name}}
+          <v-icon @click="toggleEditing">edit</v-icon>
         </h2>
+
+        <group-form
+          v-else
+          :initial-value="group"
+          :input-props="{appendIcon: 'clear'}"
+          :input-listeners="{'click:append': toggleEditing}"
+          @save-group="editGroup"
+        />
 
         <div class="text-xs-right">
           <v-btn
@@ -37,16 +49,19 @@
 <script>
 import {groupRepository} from '@/services/database/repositories';
 import GroupDeleteDialog from '@/components/groups/GroupDeleteDialog.vue';
+import GroupForm from '@/components/groups/GroupForm.vue';
 
 export default {
   components: {
     GroupDeleteDialog,
+    GroupForm,
   },
   data() {
     return {
       loading: true,
       group: null,
       showDeleteDialog: false,
+      editing: false,
     };
   },
   created() {
@@ -64,12 +79,24 @@ export default {
       await groupRepository.remove(this.group.id);
       this.$router.push({name: 'groups-index'});
     },
-    async openDeleteDialog() {
+    async editGroup(attributes) {
+      const group = {
+        ...this.group,
+        ...attributes,
+      };
+
+      this.group = await groupRepository.update(group);
+      this.toggleEditing();
+    },
+    openDeleteDialog() {
       this.showDeleteDialog = true;
     },
-    async hideDeleteDialog() {
+    hideDeleteDialog() {
       this.showDeleteDialog = false;
     },
+    toggleEditing() {
+      this.editing = !this.editing;
+    }
   }
 }
 </script>

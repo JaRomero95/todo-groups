@@ -43,6 +43,21 @@ async function save(storeName, record) {
   });
 }
 
+async function update(storeName, record) {
+  return new Promise(async (resolve, reject) => {
+    const transaction = await openTransaction(storeName, true);
+    const request = transaction.put(record);
+
+    request.onsuccess = async event => {
+      const id = event.target.result;
+      const saved = await find(storeName, id);
+      resolve(saved);
+    };
+
+    request.onerror = reject;
+  });
+}
+
 async function getAll(storeName) {
   return new Promise(async (resolve, reject) => {
     const transaction = await openTransaction(storeName);
@@ -57,6 +72,7 @@ async function getAll(storeName) {
 function repositoryFactory(storeName) {
   return {
     create: group => save(storeName, group),
+    update: group => update(storeName, group),
     find: id => find(storeName, id),
     remove: id => remove(storeName, id),
     getAll: () => getAll(storeName),
