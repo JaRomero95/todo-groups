@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import {groupRepository} from '@/services/database/repositories';
-
 export default {
   data() {
     return {
@@ -27,8 +25,7 @@ export default {
   },
   methods: {
     async createGroup() {
-      const group = await groupRepository.create(this.group);
-      this.$emit('group', group);
+      this.$emit('create-group', this.group);
       this.group = {};
     }
   }

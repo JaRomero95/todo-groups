@@ -12,10 +12,18 @@ async function find(storeName, id) {
     const transaction = await openTransaction(storeName);
     const request = transaction.get(id);
 
-    request.onsuccess = event => {
-      resolve(event.target.result);
-    };
+    request.onsuccess = event => resolve(event.target.result);
 
+    request.onerror = reject;
+  });
+}
+
+async function remove(storeName, id) {
+  return new Promise(async (resolve, reject) => {
+    const transaction = await openTransaction(storeName, true);
+    const request = transaction.delete(id);
+
+    request.onsuccess = resolve;
     request.onerror = reject;
   });
 }
@@ -50,6 +58,7 @@ function repositoryFactory(storeName) {
   return {
     create: group => save(storeName, group),
     find: id => find(storeName, id),
+    remove: id => remove(storeName, id),
     getAll: () => getAll(storeName),
   };
 }

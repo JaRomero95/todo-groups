@@ -1,11 +1,14 @@
 <template>
   <div>
     <v-list class="pa-0">
-      <group-list-create @group="addGroup" />
+      <group-list-create
+        @create-group="$emit('create-group', $event)"
+      />
       <group-list-item
         v-for="group in groups"
         :key="group.id"
         :group="group"
+        @delete-group="$emit('delete-group', $event)"
       />
     </v-list>
 
@@ -16,7 +19,6 @@
 </template>
 
 <script>
-import {groupRepository} from '@/services/database/repositories';
 import GroupListCreate from '@/components/groups/GroupListCreate.vue';
 import GroupListItem from '@/components/groups/GroupListItem.vue';
 
@@ -34,11 +36,6 @@ export default {
   computed: {
     hasGroups() {
       return !!this.groups.length;
-    }
-  },
-  methods: {
-    async addGroup(group) {
-      this.groups.push(group);
     }
   }
 }
