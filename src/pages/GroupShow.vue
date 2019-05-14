@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import {groupRepository} from '@/services/database/repositories';
+import API from '@/services/api';
 import GroupDeleteDialog from '@/components/groups/GroupDeleteDialog.vue';
 import GroupForm from '@/components/groups/GroupForm.vue';
 
@@ -69,14 +69,14 @@ export default {
   },
   methods: {
     async loadGroup() {
-      const groupId = parseInt(this.$route.params.id, 10);
-      const group = await groupRepository.find(groupId);
+      const groupId = this.$route.params.id;
+      const group = await API.lists.show(groupId);
 
       this.group = group;
       this.loading = false;
     },
     async deleteGroup() {
-      await groupRepository.remove(this.group.id);
+      // await groupRepository.remove(this.group.id);
       this.$router.push({name: 'groups-index'});
     },
     async editGroup(attributes) {
@@ -85,7 +85,7 @@ export default {
         ...attributes,
       };
 
-      this.group = await groupRepository.update(group);
+      // this.group = await groupRepository.update(group);
       this.toggleEditing();
     },
     openDeleteDialog() {
