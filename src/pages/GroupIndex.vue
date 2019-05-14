@@ -4,15 +4,15 @@
 
     <group-list
       v-else
-      :groups="groups"
+      :groups="lists"
       @create-group="createGroup"
     />
   </div>
 </template>
 
 <script>
-import {groupRepository} from '@/services/database/repositories';
 import GroupList from '@/components/groups/GroupList.vue';
+import API from '@/services/api';
 
 export default {
   components: {
@@ -21,21 +21,42 @@ export default {
   data() {
     return {
       groups: [],
+      idBoard: null,
       loading: true
     };
   },
   created() {
     this.loadGroups();
   },
+  computed: {
+    lists() {
+      return this.groups.sort(this.compareName);
+    }
+  },
   methods: {
     async loadGroups() {
-      this.groups = await groupRepository.getAll();
+      const board = await API.board.show();
+
+      const idBoard = board.id;
+      this.idBoard = idBoard;
+      const lists = await API.lists.index(idBoard);
+
+      this.groups = lists;
       this.loading = false;
     },
-    async createGroup(attributes) {
-      const group = await groupRepository.create(attributes);
+    async createGroup({name}) {
+      const group = await API.lists.create(this.idBoard, name);
       this.groups.push(group);
     },
+    compareName({name: nameA}, {name: nameB}) {
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameB < nameA) {
+        return 1;
+      }
+
+      return 0;
+    }
   }
 }
 </script>
