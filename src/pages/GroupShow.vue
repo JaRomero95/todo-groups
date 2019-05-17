@@ -76,7 +76,7 @@ export default {
       this.loading = false;
     },
     async deleteGroup() {
-      // await groupRepository.remove(this.group.id);
+      await API.groups.destroy(this.group.id);
       this.$router.push({name: 'groups-index'});
     },
     async editGroup(attributes) {
@@ -85,7 +85,7 @@ export default {
         ...attributes,
       };
 
-      // this.group = await groupRepository.update(group);
+      this.group = await API.groups.update(this.group.id, group);
       this.toggleEditing();
     },
     openDeleteDialog() {

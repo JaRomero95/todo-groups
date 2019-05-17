@@ -2,6 +2,7 @@ import client from '../client';
 
 const listsPath = idBoard => `boards/${idBoard}/lists`;
 const listPath = idList => `lists/${idList}`;
+const closeListPath = idList => `${listPath(idList)}/closed`;
 
 async function index(idBoard) {
   const params = {fields: ['name', 'pos']};
@@ -25,9 +26,15 @@ async function show(idList) {
   return response.data;
 }
 
+async function destroy(idList) {
+  const response = await client.put(closeListPath(idList), null, {params: {value: true}});
+  return response.data;
+}
+
 export default {
   index,
   show,
   create,
   update,
+  destroy,
 };
