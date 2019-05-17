@@ -1,20 +1,19 @@
 import router from '@/services/router';
 
 function isAuthErrorStatus(status) {
-  return [400, 401].includes(status);
-}
-
-function isDataErrorMsg(message) {
-  return ['invalid token', 'invalid key'].includes(message);
+  return [401].includes(status);
 }
 
 function isAuthError(response) {
-  return response && isAuthErrorStatus(response.status) && isDataErrorMsg(response.data);
+  return response && isAuthErrorStatus(response.status);
 }
 
 function handleError(error) {
   if (isAuthError(error.response)) {
     // TODO: show invalid token alert
+    // TODO: centralize login/logout
+    localStorage.removeItem('key');
+    localStorage.removeItem('token');
     router.push({name: 'login'});
   }
 
