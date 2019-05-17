@@ -14,6 +14,8 @@
 import GroupList from '@/components/groups/GroupList.vue';
 import API from '@/services/api';
 
+const MAX_POSITION = 10000;
+
 export default {
   components: {
     GroupList,
@@ -30,7 +32,18 @@ export default {
   },
   computed: {
     lists() {
-      return this.groups.sort(this.compareName);
+      return this.groups.sort(this.comparePos);
+    },
+    slowerPos() {
+      if (this.groups.length) {
+        const positions = this.groups.map(l => l.pos);
+        return Math.min(...positions);
+      }
+
+      return MAX_POSITION;
+    },
+    nextListPosition() {
+      return this.slowerPos - 1;
     }
   },
   methods: {
@@ -45,13 +58,14 @@ export default {
       this.loading = false;
     },
     async createGroup({name}) {
-      const group = await API.lists.create(this.idBoard, name);
+      const list = {name, pos: this.nextListPosition};
+      const group = await API.lists.create(this.idBoard, list);
       this.groups.push(group);
     },
-    compareName({name: nameA}, {name: nameB}) {
-      if (nameA < nameB) {
+    comparePos({pos: posA}, {pos: posB}) {
+      if (posA < posB) {
         return -1;
-      } else if (nameB < nameA) {
+      } else if (posB < posA) {
         return 1;
       }
 
