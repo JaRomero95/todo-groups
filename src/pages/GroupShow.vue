@@ -70,7 +70,7 @@ export default {
   methods: {
     async loadGroup() {
       const groupId = this.$route.params.id;
-      const group = await API.lists.show(groupId);
+      const group = await API.groups.show(groupId);
 
       this.group = group;
       this.loading = false;
