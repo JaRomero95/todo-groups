@@ -4,7 +4,7 @@
 
     <group-list
       v-else
-      :groups="lists"
+      :groups="sortedGroups"
       @create-group="createGroup"
     />
   </div>
@@ -31,7 +31,7 @@ export default {
     this.loadGroups();
   },
   computed: {
-    lists() {
+    sortedGroups() {
       return this.groups.sort(this.comparePos);
     },
     slowerPos() {
@@ -42,7 +42,7 @@ export default {
 
       return MAX_POSITION;
     },
-    nextListPosition() {
+    nextGroupPosition() {
       return this.slowerPos - 1;
     }
   },
@@ -52,14 +52,13 @@ export default {
 
       const idBoard = board.id;
       this.idBoard = idBoard;
-      const lists = await API.lists.index(idBoard);
+      const groups = await API.groups.index(idBoard);
 
-      this.groups = lists;
+      this.groups = groups;
       this.loading = false;
     },
     async createGroup({name}) {
-      const list = {name, pos: this.nextListPosition};
-      const group = await API.lists.create(this.idBoard, list);
+      const group = await API.groups.create(this.idBoard, {name, pos: this.nextGroupPosition});
       this.groups.push(group);
     },
     comparePos({pos: posA}, {pos: posB}) {
