@@ -6,6 +6,8 @@
           ToDo-Groups
         </h1>
 
+        <logout />
+
         <app-breadcrumbs />
 
         <div class="mb-4" />
@@ -15,3 +17,13 @@
     </v-content>
   </v-app>
 </template>
+
+<script>
+import Logout from '@/components/general/Logout.vue';
+
+export default {
+  components: {
+    Logout
+  }
+}
+</script>
