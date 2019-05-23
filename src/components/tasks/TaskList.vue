@@ -7,7 +7,7 @@
       <task-list-item
         v-for="task in tasks"
         :key="task.id"
-        :task="task"
+        :initial-value="task"
         @delete-task="$emit('delete-task', $event)"
       />
     </v-list>
