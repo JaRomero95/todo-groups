@@ -5,10 +5,10 @@
   >
     <v-card>
       <v-card-title>
-        Delete group
+        Delete task
       </v-card-title>
       <v-card-text>
-        Do you want delete <strong>{{ group.name }}</strong>?
+        Do you want delete <strong>{{ task.name }}</strong>?
       </v-card-text>
       <v-card-actions>
           <v-spacer></v-spacer>
@@ -34,7 +34,7 @@
 <script>
 export default {
   props: {
-    group: {
+    task: {
       type: Object,
       required: true
     }

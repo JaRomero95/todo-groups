@@ -30,6 +30,8 @@
             Delete
           </v-btn>
         </div>
+
+        <task-index :id-list="group.id" />
       </div>
 
       <div v-else>
@@ -47,14 +49,16 @@
 </template>
 
 <script>
-import {groupRepository} from '@/services/database/repositories';
+import API from '@/services/api';
 import GroupDeleteDialog from '@/components/groups/GroupDeleteDialog.vue';
 import GroupForm from '@/components/groups/GroupForm.vue';
+import TaskIndex from '@/components/tasks/TaskIndex.vue';
 
 export default {
   components: {
     GroupDeleteDialog,
     GroupForm,
+    TaskIndex,
   },
   data() {
     return {
@@ -69,14 +73,14 @@ export default {
   },
   methods: {
     async loadGroup() {
-      const groupId = parseInt(this.$route.params.id, 10);
-      const group = await groupRepository.find(groupId);
+      const groupId = this.$route.params.id;
+      const group = await API.groups.show(groupId);
 
       this.group = group;
       this.loading = false;
     },
     async deleteGroup() {
-      await groupRepository.remove(this.group.id);
+      await API.groups.destroy(this.group.id);
       this.$router.push({name: 'groups-index'});
     },
     async editGroup(attributes) {
@@ -85,7 +89,7 @@ export default {
         ...attributes,
       };
 
-      this.group = await groupRepository.update(group);
+      this.group = await API.groups.update(this.group.id, group);
       this.toggleEditing();
     },
     openDeleteDialog() {
