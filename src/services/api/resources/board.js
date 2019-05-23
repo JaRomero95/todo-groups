@@ -1,14 +1,13 @@
-// "https://api.trello.com/1/search?query=ToDo Groups&modelTypes=boards"
 import client from '../client';
+import config from '@/config';
 
-// {{url}}/search?query=MyToDoGroups&modelTypes=boards&key={{key}}&token={{token}}
 const searchPath = 'search';
 const boardsPath = 'boards';
 
-const GROUP_NAME = 'MyToDoGroups';
+const {BOARD_NAME} = config;
 
 async function show() {
-  const params = {modelTypes: 'boards', query: GROUP_NAME};
+  const params = {modelTypes: 'boards', query: BOARD_NAME};
   const response = await client.get(searchPath, {params});
   const {boards} = response.data;
   let board = boards && boards[0];
@@ -21,7 +20,7 @@ async function show() {
 }
 
 async function create() {
-  const params = {name: GROUP_NAME};
+  const params = {name: BOARD_NAME, defaultLabels: false, defaultLists: false};
   const response = await client.post(boardsPath, null, {params});
   return response.data;
 }
