@@ -7,7 +7,7 @@ import cards from './resources/cards';
  * 
  * DSL             Trello
  * =======================
- *                 board
+ * database*       board
  * group           list
  * task            card   
  */
