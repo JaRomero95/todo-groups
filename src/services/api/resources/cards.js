@@ -5,7 +5,8 @@ const createCardPath = 'cards';
 const cardPath = idCard => `cards/${idCard}`;
 
 async function index(idList) {
-  const response = await client.get(cardsPath(idList));
+  const params = {fields: ['name', 'pos']};
+  const response = await client.get(cardsPath(idList), {params});
   return response.data;
 }
 
