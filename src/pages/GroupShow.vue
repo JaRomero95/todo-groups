@@ -30,6 +30,8 @@
             Delete
           </v-btn>
         </div>
+
+        <task-index :id-list="group.id" />
       </div>
 
       <div v-else>
@@ -50,11 +52,13 @@
 import API from '@/services/api';
 import GroupDeleteDialog from '@/components/groups/GroupDeleteDialog.vue';
 import GroupForm from '@/components/groups/GroupForm.vue';
+import TaskIndex from '@/components/tasks/TaskIndex.vue';
 
 export default {
   components: {
     GroupDeleteDialog,
     GroupForm,
+    TaskIndex,
   },
   data() {
     return {
