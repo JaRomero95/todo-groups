@@ -1,9 +1,10 @@
 import axios from 'axios';
+import config from '@/config';
 import handleAuthErrors from './interceptors/handle-auth-errors';
 import auth from './interceptors/auth';
 
 const instance = axios.create({
-  baseURL: 'https://api.trello.com/1',
+  baseURL: config.TRELLO_API_URL,
 });
 
 instance.interceptors.request.use(
