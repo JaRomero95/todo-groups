@@ -1,0 +1,21 @@
+{
+  "boards": [
+    {
+      "id": "5ce6c70758a74356f11b366c",
+      "name": "MyToDoGroups",
+      "idOrganization": null
+    }
+  ],
+  "options": {
+    "terms": [
+      {
+        "text": "MyToDoGroups"
+      }
+    ],
+    "modifiers": [],
+    "modelTypes": [
+      "boards"
+    ],
+    "partial": false
+  }
+}

@@ -7,6 +7,7 @@
         <a target="_blank" href="https://trello.com/app-key">Get API Token</a>
         <br/>
         <v-text-field
+          name="api-key"
           v-model="data.key"
           placeholder="API Token"
           required
@@ -21,6 +22,7 @@
         </a>
         <br/>
         <v-text-field
+          name="oauth-token"
           v-model="data.token"
           placeholder="OAuth Token"
           required

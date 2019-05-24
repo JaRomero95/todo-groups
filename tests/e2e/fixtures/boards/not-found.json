@@ -1,0 +1,15 @@
+{
+  "boards": [],
+  "options": {
+    "terms": [
+      {
+        "text": "MyToDoGroups"
+      }
+    ],
+    "modifiers": [],
+    "modelTypes": [
+      "boards"
+    ],
+    "partial": false
+  }
+}
