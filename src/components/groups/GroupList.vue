@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-test="group-list">
     <v-list class="pa-0">
       <group-list-create
         @create-group="$emit('create-group', $event)"

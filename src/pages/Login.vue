@@ -2,7 +2,10 @@
   <div>
     <h1>Login</h1>
 
-    <form @submit.prevent="login">
+    <form
+      @submit.prevent="login"
+      data-test="login-form"
+    >
       <p>
         <a target="_blank" href="https://trello.com/app-key">Get API Token</a>
         <br/>
