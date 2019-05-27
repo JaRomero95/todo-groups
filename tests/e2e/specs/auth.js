@@ -1,22 +1,45 @@
 describe('Login', () => {
-  beforeEach(() => {
-    // TODO: get urls from api service
-    cy.route('1/search*', 'fixture:boards/board.json');
-    cy.route('1/boards/*/lists*', 'fixture:lists/lists.json');
+  context('without previous auth', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    })
+  
+    it('Success auth flow', () => {
+      logoutButton().should('not.exist');
+  
+      fillLoginForm();
+  
+      expectedToBeInHomePage();
+  
+      logoutButton().click();
+  
+      expectedToBeInLoginPage();
+    })
 
-    cy.visit('/');
+    it('Invalid auth flow', () => {
+      cy.route({
+        url: '1/members/me*', // TODO: import url from somewhere
+        status: 401
+      });
+
+      fillLoginForm();
+
+      cy.get('.v-alert').contains('Invalid credentials');
+    })
   })
 
-  it('Success auth flow', () => {
-    logoutButton().should('not.exist');
+  context('with previous auth', () => {
+    beforeEach(() => {
+      // TODO: extract function to reuse storage logic in app
+      localStorage.setItem('key', 'a');
+      localStorage.setItem('token', 'b');
 
-    fillLoginForm();
+      cy.visit('/')
+    })
 
-    cy.get('[data-test=group-list]');
-
-    logoutButton().click();
-
-    cy.get('[data-test=login-form]');
+    it('Redirect to home if tokens exists', () => {
+      expectedToBeInHomePage();
+    })
   })
 
   function fillLoginForm() {
@@ -27,5 +50,17 @@ describe('Login', () => {
 
   function logoutButton() {
     return cy.get('[data-test=logout]');
+  }
+
+  // TODO: extract function to route tests helpers
+  function expectedToBeInHomePage() {
+    cy.url().should('include', '/groups'); // TODO: add helper to test exact url without domain
+    cy.get('[data-test=group-list]');
+  }
+
+  // TODO: extract function to route tests helpers
+  function expectedToBeInLoginPage() {
+    cy.url().should('include', '/login'); // TODO: add helper to test exact url without domain
+    cy.get('[data-test=login-form]');
   }
 })
