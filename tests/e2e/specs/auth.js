@@ -1,3 +1,5 @@
+import {expectedToBeInHomePage, expectedToBeInLoginPage} from './../support/page-assertions';
+
 describe('Login', () => {
   context('without previous auth', () => {
     beforeEach(() => {
@@ -30,9 +32,7 @@ describe('Login', () => {
 
   context('with previous auth', () => {
     beforeEach(() => {
-      // TODO: extract function to reuse storage logic in app
-      localStorage.setItem('key', 'a');
-      localStorage.setItem('token', 'b');
+      cy.login();
 
       cy.visit('/')
     })
@@ -50,17 +50,5 @@ describe('Login', () => {
 
   function logoutButton() {
     return cy.get('[data-test=logout]');
-  }
-
-  // TODO: extract function to route tests helpers
-  function expectedToBeInHomePage() {
-    cy.url().should('include', '/groups'); // TODO: add helper to test exact url without domain
-    cy.get('[data-test=group-list]');
-  }
-
-  // TODO: extract function to route tests helpers
-  function expectedToBeInLoginPage() {
-    cy.url().should('include', '/login'); // TODO: add helper to test exact url without domain
-    cy.get('[data-test=login-form]');
   }
 })
