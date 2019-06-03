@@ -6,6 +6,7 @@
           v-model="group.name"
           append-outer-icon="send"
           placeholder="New group..."
+          name="name"
           box
           @click:append-outer="createGroup"
         />

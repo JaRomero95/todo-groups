@@ -23,3 +23,9 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+  // TODO: extract function to reuse storage logic in app
+  localStorage.setItem('key', 'a');
+  localStorage.setItem('token', 'b');
+})

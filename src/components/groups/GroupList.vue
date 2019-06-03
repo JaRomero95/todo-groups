@@ -9,11 +9,12 @@
         :key="group.id"
         :group="group"
         @delete-group="$emit('delete-group', $event)"
+        data-test="group-list-item"
       />
     </v-list>
 
     <div v-if="!hasGroups">
-      Add groups...
+      Create your first group...
     </div>
   </div>
 </template>
