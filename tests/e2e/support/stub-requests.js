@@ -2,6 +2,7 @@ const BOARD_URL = '1/search*';
 const LISTS_URL = '1/boards/*/lists*';
 const LIST_URL = '1/lists/*';
 const CLOSE_LIST_URL = `${LIST_URL}/closed*`
+const CARDS_URL = '1/cards*'
 const PROFILE_URL = '1/members/me*';
 
 function stubGetBoard(response='fixture:boards/board.json') {
@@ -24,6 +25,10 @@ function stubDeleteList(response='fixture:lists/delete.json') {
   cy.route('PUT', CLOSE_LIST_URL, response).as('deleteList');
 }
 
+function stubPostCard(response='fixture:cards/create.json') {
+  cy.route('POST', CARDS_URL, response).as('postCard');
+}
+
 function stubGetProfile(response='fixture:me/me.json') {
   cy.route('GET', PROFILE_URL, response).as('getProfile');
 }
@@ -35,4 +40,5 @@ export {
   stubGetList,
   stubGetProfile,
   stubDeleteList,
+  stubPostCard,
 }

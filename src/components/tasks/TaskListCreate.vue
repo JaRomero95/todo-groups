@@ -6,6 +6,7 @@
           v-model="task.name"
           append-outer-icon="send"
           placeholder="New task..."
+          name="name"
           box
           @click:append-outer="createTask"
         />
