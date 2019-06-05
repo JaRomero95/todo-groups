@@ -65,6 +65,7 @@ export default {
     },
     async deleteTask() {
       await API.tasks.destroy(this.taskToDelete.id);
+      // FIXME: avoid mutate tasks prop
       this.tasks = this.tasks.filter(task => task.id !== this.taskToDelete.id);
       this.hideDeleteDialog();
     },
