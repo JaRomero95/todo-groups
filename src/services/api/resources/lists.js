@@ -21,7 +21,7 @@ async function update(idList, params) {
 }
 
 async function show(idList) {
-  const params = {cards: 'all', card_fields: 'name'};
+  const params = {cards: 'all', card_fields: ['name', 'pos', 'due', 'dueComplete']};
   const response = await client.get(listPath(idList), {params});
   return response.data;
 }
