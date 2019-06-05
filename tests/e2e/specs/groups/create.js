@@ -23,6 +23,7 @@ describe('Groups create', () => {
 
   function addNewGroup() {
     cy.get('[name=name]').type('test x{enter}');
+    cy.wait('@postList');
   }
 
   function groupListRows() {

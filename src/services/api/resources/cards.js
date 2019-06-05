@@ -4,12 +4,6 @@ const cardsPath = idList => `lists/${idList}/cards`;
 const createCardPath = 'cards';
 const cardPath = idCard => `cards/${idCard}`;
 
-async function index(idList) {
-  const params = {fields: ['name', 'pos', 'due', 'dueComplete']};
-  const response = await client.get(cardsPath(idList), {params});
-  return response.data;
-}
-
 async function create(idList, card) {
   const params = {idList, ...card};
   const response = await client.post(createCardPath, null, {params});
@@ -27,7 +21,6 @@ async function destroy(idCard) {
 }
 
 export default {
-  index,
   create,
   update,
   destroy,

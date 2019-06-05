@@ -28,6 +28,10 @@ export default {
       type: String,
       required: true
     },
+    tasks: {
+      type: Array,
+      required: true
+    }
   },
   components: {
     TaskList,
@@ -35,12 +39,8 @@ export default {
   },
   data() {
     return {
-      tasks: [],
       taskToDelete: null
     };
-  },
-  created() {
-    this.loadTasks();
   },
   computed: {
     sortedTasks() {
@@ -59,9 +59,6 @@ export default {
     }
   },
   methods: {
-    async loadTasks() {
-      this.tasks = await API.tasks.index(this.idList);
-    },
     async createTask({name}) {
       const task = await API.tasks.create(this.idList, {name, pos: this.nextPosition});
       this.tasks.push(task);
