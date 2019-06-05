@@ -1,5 +1,8 @@
 <template>
-  <v-btn @click="logout">
+  <v-btn
+    @click="logout"
+    data-test="logout"
+  >
     Logout
   </v-btn>
 </template>

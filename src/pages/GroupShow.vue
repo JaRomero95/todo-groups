@@ -7,9 +7,15 @@
         <h2
           v-if="!editing"
           class="headline"
+          data-test="group-title"
         >
           {{group.name}}
-          <v-icon @click="toggleEditing">edit</v-icon>
+          <v-icon
+            @click="toggleEditing"
+            data-test="group-edit"
+          >
+            edit
+          </v-icon>
         </h2>
 
         <group-form
@@ -18,6 +24,7 @@
           :input-props="{appendIcon: 'clear'}"
           :input-listeners="{'click:append': toggleEditing}"
           @save-group="editGroup"
+          data-test="group-edit-form"
         />
 
         <div class="text-xs-right">
@@ -25,13 +32,18 @@
             color="error"
             small
             @click="openDeleteDialog"
+            data-test="open-delete-dialog"
           >
             <v-icon>delete</v-icon>
             Delete
           </v-btn>
         </div>
 
-        <task-index :id-list="group.id" />
+        <task-index
+          v-if="group"
+          :id-list="group.id"
+          :tasks="tasks"
+        />
       </div>
 
       <div v-else>
@@ -67,6 +79,11 @@ export default {
       showDeleteDialog: false,
       editing: false,
     };
+  },
+  computed: {
+    tasks() {
+      return this.group && this.group.cards;
+    }
   },
   created() {
     this.loadGroup();

@@ -12,7 +12,10 @@
     </v-list-tile-content>
 
     <v-list-tile-action @click="deleteTask">
-      <v-btn icon>
+      <v-btn
+        icon
+        data-test="open-task-delete-dialog"
+      >
         <v-icon>delete</v-icon>
       </v-btn>
     </v-list-tile-action>
