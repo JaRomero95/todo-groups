@@ -8,7 +8,13 @@
   "cards": [
     {
       "id": "b8b8b8b8b8b8b8b8b8b8b8b8",
-      "name": "ww"
+      "name": "Clean code",
+      "pos": 1000
+    },
+    {
+      "id": "g4g4g4g4g4g4g4g4g4g4g4g4",
+      "name": "DRY",
+      "pos": 500
     }
   ]
 }

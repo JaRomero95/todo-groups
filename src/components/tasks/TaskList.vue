@@ -9,6 +9,7 @@
         :key="task.id"
         :initial-value="task"
         @delete-task="$emit('delete-task', $event)"
+        data-test="task-list-item"
       />
     </v-list>
 
