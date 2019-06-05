@@ -1,6 +1,6 @@
 import {expectedToBeInHomePage} from './../../support/page-assertions';
 
-describe('Groups create', () => {
+describe('Groups delete', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/groups/show/123');

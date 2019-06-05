@@ -31,6 +31,7 @@ describe('Tasks create', () => {
   }
 
   function taskListItems() {
+    // TODO: DRY, function used in specs/tasks/delete too
     return cy.get('[data-test="task-list-item"]');
   }
 })
