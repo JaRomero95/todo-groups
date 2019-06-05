@@ -7,9 +7,15 @@
         <h2
           v-if="!editing"
           class="headline"
+          data-test="group-title"
         >
           {{group.name}}
-          <v-icon @click="toggleEditing">edit</v-icon>
+          <v-icon
+            @click="toggleEditing"
+            data-test="group-edit"
+          >
+            edit
+          </v-icon>
         </h2>
 
         <group-form
@@ -18,6 +24,7 @@
           :input-props="{appendIcon: 'clear'}"
           :input-listeners="{'click:append': toggleEditing}"
           @save-group="editGroup"
+          data-test="group-edit-form"
         />
 
         <div class="text-xs-right">

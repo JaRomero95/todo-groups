@@ -2,6 +2,7 @@
   <form @submit.prevent="saveGroup">
     <v-text-field
       v-model="group.name"
+      name="name"
       append-outer-icon="send"
       placeholder="Name..."
       box

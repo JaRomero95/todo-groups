@@ -18,6 +18,10 @@ function stubPostList(response='fixture:lists/create.json') {
   cy.route('POST', LISTS_URL, response).as('postList');
 }
 
+function stubPutList(response='fixture:lists/update.json') {
+  cy.route('PUT', LIST_URL, response).as('putList');
+}
+
 function stubGetList(response='fixture:lists/show.json') {
   cy.route('GET', LIST_URL, response).as('getList');
 }
@@ -42,6 +46,7 @@ export {
   stubGetBoard,
   stubGetLists,
   stubPostList,
+  stubPutList,
   stubGetList,
   stubGetProfile,
   stubDeleteList,
