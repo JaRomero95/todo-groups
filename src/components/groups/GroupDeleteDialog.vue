@@ -16,6 +16,7 @@
           <v-btn
             flat="flat"
             @click="$emit('cancel')"
+            data-test="cancel-delete-group"
           >
             Cancel
           </v-btn>
@@ -23,6 +24,7 @@
           <v-btn
             flat="flat"
             @click="$emit('delete')"
+            data-test="confirm-delete-group"
           >
             Delete
           </v-btn>

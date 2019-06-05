@@ -25,13 +25,18 @@
             color="error"
             small
             @click="openDeleteDialog"
+            data-test="open-delete-dialog"
           >
             <v-icon>delete</v-icon>
             Delete
           </v-btn>
         </div>
 
-        <task-index :id-list="group.id" />
+        <task-index
+          v-if="group"
+          :id-list="group.id"
+          :tasks="tasks"
+        />
       </div>
 
       <div v-else>
@@ -67,6 +72,11 @@ export default {
       showDeleteDialog: false,
       editing: false,
     };
+  },
+  computed: {
+    tasks() {
+      return this.group && this.group.cards;
+    }
   },
   created() {
     this.loadGroup();
