@@ -1,9 +1,9 @@
 <template>
   <div>
+    <task-list-create
+      @create-task="$emit('create-task', $event)"
+    />
     <v-list class="pa-0">
-      <task-list-create
-        @create-task="$emit('create-task', $event)"
-      />
       <task-list-item
         v-for="task in tasks"
         :key="task.id"

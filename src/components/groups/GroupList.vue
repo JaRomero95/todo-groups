@@ -1,9 +1,9 @@
 <template>
   <div data-test="group-list">
+    <group-list-create
+      @create-group="$emit('create-group', $event)"
+    />
     <v-list class="pa-0">
-      <group-list-create
-        @create-group="$emit('create-group', $event)"
-      />
       <group-list-item
         v-for="group in groups"
         :key="group.id"
