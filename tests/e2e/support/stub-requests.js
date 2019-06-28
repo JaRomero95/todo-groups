@@ -34,6 +34,10 @@ function stubPostCard(response='fixture:cards/create.json') {
   cy.route('POST', CARDS_URL, response).as('postCard');
 }
 
+function stubPutCard(response='fixture:cards/update.json') {
+  cy.route('PUT', CARD_URL, response).as('putCard');
+}
+
 function stubDeleteCard(response='fixture:cards/create.json') {
   cy.route('DELETE', CARD_URL, response).as('deleteCard');
 }
@@ -51,5 +55,6 @@ export {
   stubGetProfile,
   stubDeleteList,
   stubPostCard,
+  stubPutCard,
   stubDeleteCard,
 }
