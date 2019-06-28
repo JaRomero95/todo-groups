@@ -1,18 +1,10 @@
 <template>
-  <v-list-tile>
-    <v-list-tile-content>
-      <form @submit.prevent="createTask">
-        <v-text-field
-          v-model="task.name"
-          append-outer-icon="send"
-          placeholder="New task..."
-          name="name"
-          box
-          @click:append-outer="createTask"
-        />
-      </form>
-    </v-list-tile-content>
-  </v-list-tile>
+  <app-name-form
+    v-model="task.name"
+    name="name"
+    placeholder="New task..."
+    @submit="createTask"
+  />
 </template>
 
 <script>
@@ -27,7 +19,7 @@ export default {
   methods: {
     async createTask() {
       this.$emit('create-task', this.task);
-      this.task = {};
+      this.task.name = '';
     }
   }
 }
