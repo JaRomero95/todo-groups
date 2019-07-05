@@ -25,13 +25,13 @@ describe('Mark tasks as completed', () => {
 
   function expectSendCompleteTaskRequest() {
     const isoDateRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-    const expectedParams = {due: isoDateRegexp, dueComplete: true};
+    const expectedParams = {due: isoDateRegexp, dueComplete: 'true'};
 
     expectSendTaskRequest(expectedParams);
   }
 
   function expectSendIncompleteTaskRequest() {
-    const expectedParams = {due: '', dueComplete: false};
+    const expectedParams = {due: '', dueComplete: 'false'};
 
     expectSendTaskRequest(expectedParams);
   }

@@ -1,3 +1,5 @@
+import {expectQueryParams} from './../../support/xhr-assertions';
+
 describe('Groups create', () => {
   beforeEach(() => {
     cy.login();
@@ -23,7 +25,7 @@ describe('Groups create', () => {
 
   function addNewGroup() {
     cy.get('[name=name]').type('test x{enter}');
-    cy.wait('@postList');
+    cy.wait('@postList').then(expectQueryParams.bind(null, {name: 'test x', pos: '998'}));
   }
 
   function groupListRows() {

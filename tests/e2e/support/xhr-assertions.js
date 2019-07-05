@@ -11,9 +11,10 @@ function expectQueryParams(params, xhr) {
 }
 
 function getMatcherFromValueType(value) {
-  return value && value.constructor === RegExp ? 'match' : 'string';
+  return value && value.constructor === RegExp ? 'match' : 'eq';
 }
 
 export {
-  expectQueryParams
-}
+  // eslint-disable-next-line import/prefer-default-export
+  expectQueryParams,
+};

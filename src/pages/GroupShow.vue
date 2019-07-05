@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-loading v-if="loading" />
+    <app-loading v-if="loadingGroup" />
 
     <div v-else>
       <div v-if="group">
@@ -11,7 +11,7 @@
         >
           {{group.name}}
           <v-icon
-            @click="toggleEditing"
+            @click="enableEdit"
             data-test="group-edit"
           >
             edit
@@ -20,10 +20,8 @@
 
         <group-form
           v-else
-          :initial-value="group"
           :input-props="{appendIcon: 'clear'}"
-          :input-listeners="{'click:append': toggleEditing}"
-          @save-group="editGroup"
+          :input-listeners="{'click:append': disableEdit}"
           data-test="group-edit-form"
         />
 
@@ -55,13 +53,13 @@
       v-if="showDeleteDialog"
       :group="group"
       @cancel="hideDeleteDialog"
-      @delete="deleteGroup"
+      @delete="handleDeleteGroup"
     />
   </div>
 </template>
 
 <script>
-import API from '@/services/api';
+import {mapGetters, mapActions} from 'vuex';
 import GroupDeleteDialog from '@/components/groups/GroupDeleteDialog.vue';
 import GroupForm from '@/components/groups/GroupForm.vue';
 import TaskIndex from '@/components/tasks/TaskIndex.vue';
@@ -74,40 +72,29 @@ export default {
   },
   data() {
     return {
-      loading: true,
-      group: null,
       showDeleteDialog: false,
       editing: false,
     };
   },
   computed: {
+    ...mapGetters(['group', 'loadingGroup']),
     tasks() {
       return this.group && this.group.cards;
-    }
+    },
   },
   created() {
-    this.loadGroup();
+    this.loadGroup(this.$route.params.id);
+  },
+  watch: {
+    group() {
+      this.disableEdit();
+    }
   },
   methods: {
-    async loadGroup() {
-      const groupId = this.$route.params.id;
-      const group = await API.groups.show(groupId);
-
-      this.group = group;
-      this.loading = false;
-    },
-    async deleteGroup() {
-      await API.groups.destroy(this.group.id);
+    ...mapActions(['loadGroup', 'deleteGroup']),
+    async handleDeleteGroup() {
+      await this.deleteGroup(this.group.id);
       this.$router.push({name: 'groups-index'});
-    },
-    async editGroup(attributes) {
-      const group = {
-        ...this.group,
-        ...attributes,
-      };
-
-      this.group = await API.groups.update(this.group.id, group);
-      this.toggleEditing();
     },
     openDeleteDialog() {
       this.showDeleteDialog = true;
@@ -115,8 +102,11 @@ export default {
     hideDeleteDialog() {
       this.showDeleteDialog = false;
     },
-    toggleEditing() {
-      this.editing = !this.editing;
+    enableEdit() {
+      this.editing = true;
+    },
+    disableEdit() {
+      this.editing = false;
     }
   }
 }

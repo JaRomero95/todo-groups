@@ -1,8 +1,6 @@
 <template>
   <div>
-    <task-list-create
-      @create-task="$emit('create-task', $event)"
-    />
+    <task-list-create />
     <v-list class="pa-0">
       <task-list-item
         v-for="task in tasks"
