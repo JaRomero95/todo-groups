@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent="saveGroup">
+  <form @submit.prevent="handleSubmit">
     <v-text-field
       v-model="group.name"
       name="name"
       append-outer-icon="send"
       placeholder="Name..."
       box
-      @click:append-outer="saveGroup"
+      @click:append-outer="handleSubmit"
       v-bind="inputProps"
       v-on="inputListeners"
     />
@@ -14,14 +14,10 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
+
 export default {
   props: {
-    initialValue: {
-      type: Object,
-      default: () => ({
-        name: '',
-      })
-    },
     inputProps: {
       type: Object,
       default: () => ({})
@@ -33,13 +29,17 @@ export default {
   },
   data() {
     return {
-      group: {...this.initialValue},
+      group: {},
     };
   },
+  computed: mapGetters({initialValue: 'group'}),
+  beforeMount() {
+    this.group = {...this.initialValue};
+  },
   methods: {
-    async saveGroup() {
-      this.$emit('save-group', this.group);
-      this.group = {};
+    ...mapActions(['editGroup']),
+    async handleSubmit() {
+      this.editGroup(this.group);
     }
   }
 }
