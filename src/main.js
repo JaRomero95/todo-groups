@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.min.css';
 
 import App from '@/App.vue';
 import router from '@/services/router';
+import store from '@/services/store';
 import '@/registerServiceWorker';
 import '@/services/globalRegistration';
 
@@ -14,5 +15,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app');

@@ -13,8 +13,7 @@ module.exports = {
     'no-console': production ? 'error' : 'off',
     'no-debugger': production ? 'error' : 'off',
     'arrow-parens': ['error', 'as-needed'],
-    'no-plusplus': 'off',
-    'no-use-before-define': ['error', { 'functions': false }],
+    'no-use-before-define': ['error', {'functions': false}],
     'object-curly-spacing': ['error', 'never'],
     'comma-dangle': ['error', {
       'arrays': 'only-multiline',
@@ -22,6 +21,10 @@ module.exports = {
       'imports': 'only-multiline',
       'exports': 'only-multiline',
       'functions': 'ignore'
+    }],
+    'no-param-reassign': ['error', {
+      'props': true,
+      'ignorePropertyModificationsFor': ['state']
     }]
   },
   parserOptions: {
