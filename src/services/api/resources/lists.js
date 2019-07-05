@@ -5,7 +5,7 @@ const listPath = idList => `lists/${idList}`;
 const closeListPath = idList => `${listPath(idList)}/closed`;
 
 async function index(idBoard) {
-  const params = {fields: ['name', 'pos']};
+  const params = {fields: ['name', 'pos'], filter: 'open'};
   const response = await client.get(listsPath(idBoard), {params});
   return response.data;
 }
