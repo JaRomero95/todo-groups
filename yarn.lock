@@ -10452,6 +10452,11 @@ vuetify@^1.5.13:
   resolved "https://nexus.nosolosoftware.es/repository/npm_nss_group/vuetify/-/vuetify-1.5.13.tgz#b2e406ebdc59723c5ecbd2d0595d3d2ae0cac812"
   integrity sha512-mUOs9znDmMO/A2I117B/ZHyFlwSqkKplhSL8G2EnS+m0rvZv2Uqjo9idOBbdhaJ3A9sJWT6wDUFywEYuuIcu+g==
 
+vuex@^3.1.1:
+  version "3.1.1"
+  resolved "https://nexus.nosolosoftware.es/repository/npm_nss_group/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
+  integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
+
 w3c-hr-time@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.nosolosoftware.es/repository/npm_nss_group/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"
