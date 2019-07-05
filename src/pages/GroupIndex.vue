@@ -1,75 +1,35 @@
 <template>
   <div>
-    <app-loading v-if="loading" />
+    <app-loading v-if="loadingGroups" />
 
     <group-list
       v-else
-      :groups="sortedGroups"
-      @create-group="createGroup"
+      :groups="groups"
     />
   </div>
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
 import GroupList from '@/components/groups/GroupList.vue';
-import API from '@/services/api';
-
-const MAX_POSITION = 10000;
 
 export default {
   components: {
     GroupList,
   },
-  data() {
-    return {
-      groups: [],
-      idBoard: null,
-      loading: true
-    };
+  computed: {
+    ...mapGetters(['groups', 'loadingGroups', 'boardId'])
+  },
+  watch: {
+    boardId(boardId) {
+      this.loadGroups(boardId);
+    }
   },
   created() {
-    this.loadGroups();
-  },
-  computed: {
-    sortedGroups() {
-      return this.groups.sort(this.comparePos);
-    },
-    slowerPos() {
-      if (this.groups.length) {
-        const positions = this.groups.map(l => l.pos);
-        return Math.min(...positions);
-      }
-
-      return MAX_POSITION;
-    },
-    nextGroupPosition() {
-      return this.slowerPos - 1;
+    if (!this.boardId) {
+      this.loadBoard();
     }
   },
-  methods: {
-    async loadGroups() {
-      const board = await API.board.show();
-
-      const idBoard = board.id;
-      this.idBoard = idBoard;
-      const groups = await API.groups.index(idBoard);
-
-      this.groups = groups;
-      this.loading = false;
-    },
-    async createGroup({name}) {
-      const group = await API.groups.create(this.idBoard, {name, pos: this.nextGroupPosition});
-      this.groups.push(group);
-    },
-    comparePos({pos: posA}, {pos: posB}) {
-      if (posA < posB) {
-        return -1;
-      } else if (posB < posA) {
-        return 1;
-      }
-
-      return 0;
-    }
-  }
+  methods: mapActions(['loadBoard', 'loadGroups'])
 }
 </script>

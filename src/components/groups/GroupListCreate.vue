@@ -3,11 +3,13 @@
     v-model="group.name"
     name="name"
     placeholder="New group..."
-    @submit="createGroup"
+    @submit="handleCreateGroup"
   />
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
+
 export default {
   data() {
     return {
@@ -16,9 +18,14 @@ export default {
       }
     };
   },
+  computed: mapGetters(['boardId']),
   methods: {
-    async createGroup() {
-      this.$emit('create-group', this.group);
+    ...mapActions(['createGroup']),
+    async handleCreateGroup() {
+      this.createGroup({boardId: this.boardId, ...this.group});
+      this.resetGroup();
+    },
+    resetGroup() {
       this.group.name = '';
     }
   }
@@ -28,7 +35,6 @@ export default {
 <style lang="scss" scoped>
 .row-icon {
   background-color: #eee;
-  // background-color: blue;
   height: 40px;
   display: flex;
 
@@ -39,14 +45,12 @@ export default {
   }
   
   input {
-    // background: red;
     width: 100%;
     padding: 5px 10px;
     outline: none;
   }
 
   button {
-    // background: green;
     margin-right: 8px;
     outline: none;
   }
