@@ -27,7 +27,7 @@
       <p>
         <a
           target="_blank"
-          href="https://trello.com/1/authorize?expiration=1day&scope=read,write&response_type=token&name=Server%20Token&key=***REMOVED***">
+          :href="OAuthUrl">
           Get OAuth token
         </a>
         <br/>
@@ -52,6 +52,9 @@
 <script>
 import API from '@/services/api';
 
+const trelloToken = process.env.VUE_APP_TRELLO_TOKEN;
+const trelloExpiration = process.env.VUE_APP_TRELLO_EXPIRATION;
+
 export default {
   data() {
     return {
@@ -61,6 +64,11 @@ export default {
       },
       errors: {}
     }
+  },
+  computed: {
+    OAuthUrl() {
+      return `https://trello.com/1/authorize?expiration=${trelloExpiration}&scope=read,write&response_type=token&name=Server%20Token&key=${trelloToken}`;
+    },
   },
   created() {
     const key = localStorage.getItem('key');
