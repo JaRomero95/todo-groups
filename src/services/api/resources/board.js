@@ -10,7 +10,7 @@ async function show() {
   const params = {modelTypes: 'boards', query: BOARD_NAME};
   const response = await client.get(searchPath, {params});
   const {boards} = response.data;
-  let board = boards && boards[0];
+  let board = boards.find(({name}) => name === BOARD_NAME);
 
   if (!board) {
     board = await create();
