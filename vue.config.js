@@ -1,4 +1,4 @@
 module.exports = {
-  baseUrl: '/todo-groups/',
+  publicPath: process.env.BASE_URL,
   outputDir: 'docs',
 };
