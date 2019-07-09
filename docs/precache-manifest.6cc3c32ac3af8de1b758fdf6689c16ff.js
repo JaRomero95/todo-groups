@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/todo-groups/robots.txt"
   },
   {
-    "revision": "37f41de5d61a750e26e8",
-    "url": "/todo-groups/js/chunk-vendors.7283e64f.js"
+    "revision": "3f64066a5eb0397af272",
+    "url": "/todo-groups/js/chunk-vendors.b19bef7d.js"
   },
   {
-    "revision": "03114d707e80e046afee",
-    "url": "/todo-groups/js/app.3e910598.js"
+    "revision": "69e9676e866b92a3a172",
+    "url": "/todo-groups/js/app.9c7f387e.js"
   },
   {
-    "revision": "d0191a8ffa45a07571664a968dd3feb3",
+    "revision": "cbad69c25ab8c9a10177c6421dec51b5",
     "url": "/todo-groups/index.html"
   },
   {
-    "revision": "37f41de5d61a750e26e8",
+    "revision": "3f64066a5eb0397af272",
     "url": "/todo-groups/css/chunk-vendors.d7a9a903.css"
   },
   {
-    "revision": "03114d707e80e046afee",
+    "revision": "69e9676e866b92a3a172",
     "url": "/todo-groups/css/app.5fc0bb4d.css"
   }
 ];
