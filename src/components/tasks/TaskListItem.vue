@@ -8,7 +8,11 @@
     </v-list-tile-action>
 
     <v-list-tile-content>
-      <v-list-tile-title v-text="task.name" />
+      <v-list-tile-title
+        v-text="task.name"
+        :class="{'task-done': task.dueComplete}"
+        class="task-name"
+      />
     </v-list-tile-content>
 
     <v-list-tile-action @click="deleteTask">
@@ -68,3 +72,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .task-done {
+    text-decoration: line-through;
+  }
+</style>
+
