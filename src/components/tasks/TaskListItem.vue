@@ -8,7 +8,11 @@
     </v-list-tile-action>
 
     <v-list-tile-content>
-      <v-list-tile-title v-text="task.name" />
+      <v-list-tile-title
+        v-text="task.name"
+        :class="{'task-done': task.dueComplete}"
+        class="task-name"
+      />
     </v-list-tile-content>
 
     <v-list-tile-action @click="deleteTask">
@@ -23,7 +27,7 @@
 </template>
 
 <script>
-import API from '@/services/api';
+import {mapActions} from 'vuex';
 
 export default {
   props: {
@@ -37,7 +41,13 @@ export default {
       task: {...this.initialValue},
     };
   },
+  watch: {
+    task() {
+      this.task = {...this.initialValue};
+    }
+  },
   methods: {
+    ...mapActions(['updateTask']),
     deleteTask() {
       this.$emit('delete-task', this.task);
     },
@@ -50,15 +60,22 @@ export default {
     },
     markAsComplete() {
       const now = new Date();
-      this.updateTask({due: now.toISOString(), dueComplete: true});
+      this.handleUpdateTask({due: now.toISOString(), dueComplete: true});
     },
     markAsIncomplete() {
-      this.updateTask({due: '', dueComplete: false});
+      this.handleUpdateTask({due: '', dueComplete: false});
     },
-    async updateTask(params) {
-      // FIXME: emit instead save here
-      const task = await API.tasks.update(this.task.id, params);
+    async handleUpdateTask(params) {
+      const payload = {id: this.task.id, ...params};
+      this.updateTask(payload);
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .task-done {
+    text-decoration: line-through;
+  }
+</style>
+
