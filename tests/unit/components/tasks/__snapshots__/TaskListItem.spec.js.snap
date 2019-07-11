@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskListItem renders correctly 1`] = `
+<v-list-tile-stub activeclass="primary--text">
+  <v-list-tile-action-stub>
+    <v-checkbox-stub color="accent" errorcount="1" errormessages="" messages="" rules="" successmessages="" backgroundcolor="" ripple="true" valuecomparator="function deepEqual(a, b) {
+    if (a === b) return true;
+    if (a instanceof Date &amp;&amp; b instanceof Date) {
+        // If the values are Date, they were convert to timestamp with getTime and compare it
+        if (a.getTime() !== b.getTime()) return false;
+    }
+    if (a !== Object(a) || b !== Object(b)) {
+        // If the values aren't objects, they were already checked for equality
+        return false;
+    }
+    var props = Object.keys(a);
+    if (props.length !== Object.keys(b).length) {
+        // Different number of props, don't bother to check
+        return false;
+    }
+    return props.every(function (p) {
+        return deepEqual(a[p], b[p]);
+    });
+}" indeterminateicon="$vuetify.icons.checkboxIndeterminate" onicon="$vuetify.icons.checkboxOn" officon="$vuetify.icons.checkboxOff"></v-checkbox-stub>
+  </v-list-tile-action-stub>
+  <v-list-tile-content-stub>
+    <v-list-tile-title-stub class="task-name [object Object]"></v-list-tile-title-stub>
+  </v-list-tile-content-stub>
+  <v-list-tile-action-stub>
+    <v-btn-stub activeclass="v-btn--active" tag="button" icon="true" type="button" data-test="open-task-delete-dialog">
+      <v-icon-stub>delete</v-icon-stub>
+    </v-btn-stub>
+  </v-list-tile-action-stub>
+</v-list-tile-stub>
+`;
