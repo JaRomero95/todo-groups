@@ -42,32 +42,24 @@ export default {
     };
   },
   watch: {
-    task() {
-      this.task = {...this.initialValue};
+    initialValue: {
+      deep: true,
+      handler() {
+        this.task = {...this.initialValue}
+      }
     }
   },
   methods: {
-    ...mapActions(['updateTask']),
+    ...mapActions(['markTaskAsComplete', 'markTaskAsIncomplete']),
     deleteTask() {
       this.$emit('delete-task', this.task);
     },
     updateComplete(newValue) {
       if (newValue) {
-        this.markAsComplete();
+        this.markTaskAsComplete(this.task.id);
       } else {
-        this.markAsIncomplete();
+        this.markTaskAsIncomplete(this.task.id);
       }
-    },
-    markAsComplete() {
-      const now = new Date();
-      this.handleUpdateTask({due: now.toISOString(), dueComplete: true});
-    },
-    markAsIncomplete() {
-      this.handleUpdateTask({due: '', dueComplete: false});
-    },
-    async handleUpdateTask(params) {
-      const payload = {id: this.task.id, ...params};
-      this.updateTask(payload);
     }
   }
 }

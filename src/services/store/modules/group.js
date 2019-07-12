@@ -22,6 +22,7 @@ const getters = {
 
     return undoneTasks.concat(doneTasks);
   },
+  task: (state, getters) => taskId => getters.tasks.find(task => task.id === taskId),
   loadingGroup(state) {
     return state.loadingGroup;
   },
@@ -85,9 +86,40 @@ const actions = {
     await API.tasks.destroy(taskId);
     commit('deleteTask', taskId);
   },
-  async updateTask({commit}, task) {
-    const updatedTask = await API.tasks.update(task.id, task);
-    commit('updateTask', updatedTask);
+  markTaskAsComplete({dispatch}, taskId) {
+    const task = {
+      id: taskId,
+      due: new Date().toISOString(),
+      dueComplete: true
+    };
+
+    dispatch('updateTask', task);
+  },
+  markTaskAsIncomplete({dispatch}, taskId) {
+    const task = {
+      id: taskId,
+      due: '',
+      dueComplete: false
+    };
+
+    dispatch('updateTask', task);
+  },
+  async updateTask({commit, getters}, task) {
+    const actualTask = getters.task(task.id);
+
+    const earlyTask = {
+      ...actualTask,
+      ...task,
+    };
+
+    commit('updateTask', earlyTask);
+
+    try {
+      const updatedTask = await API.tasks.update(task.id, task);
+      commit('updateTask', updatedTask);
+    } catch (e) {
+      commit('updateTask', actualTask);
+    }
   }
 };
 

@@ -37,4 +37,23 @@ describe('getters', () => {
       expect(reducedResult).toStrictEqual([false, false, true, true]);
     });
   });
+
+  describe('task', () => {
+    it('returns tasks order by pos', () => {
+      const targetTask = {id: 11};
+
+      const state = {
+        group: {
+          cards: [
+            {id: 19},
+            targetTask,
+          ]
+        }
+      };
+
+      const task = getters.task(state, {tasks: state.group.cards})(targetTask.id);
+
+      expect(task).toEqual(targetTask);
+    });
+  });
 });
