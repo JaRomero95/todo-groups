@@ -25,7 +25,14 @@ module.exports = {
     'no-param-reassign': ['error', {
       'props': true,
       'ignorePropertyModificationsFor': ['state']
-    }]
+    }],
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "consistent": true
+      }
+    ],
   },
   parserOptions: {
     parser: 'babel-eslint',
