@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppConfirmDialog renders correctly 1`] = `
+<v-dialog-stub contentclass="" value="true" persistent="true" maxwidth="none" origin="center center" width="auto" transition="dialog-transition">
+  <v-card-stub tag="div">
+    <v-card-title-stub>
+      Hello world
+    </v-card-title-stub>
+    <v-card-text-stub>
+      Lorem ipsum dolor
+    </v-card-text-stub>
+    <v-card-actions-stub>
+      <v-spacer-stub></v-spacer-stub>
+      <v-btn-stub activeclass="v-btn--active" tag="button" flat="true" type="button" data-test="dialog-cancel-btn">
+        Cancel
+      </v-btn-stub>
+      <v-btn-stub color="success" activeclass="v-btn--active" tag="button" flat="true" type="button" data-test="dialog-confirm-btn">
+        Confirm
+      </v-btn-stub>
+    </v-card-actions-stub>
+  </v-card-stub>
+</v-dialog-stub>
+`;
