@@ -6,6 +6,9 @@ import stubs from '../support/stubs';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+const markAllAsIncompleteButton = '[data-test="mark-all-tasks-as-incomplete"]';
+const confirmDialogSelector = '[data-test="confirm-dialog"]';
+
 describe('GroupShow', () => {
   let wrapper;
   let actions;
@@ -45,10 +48,18 @@ describe('GroupShow', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('mark all tasks as incomplete button open confirm dialog', () => {
+    it('invoke markTaskAsIncomplete for each task', () => {
+      wrapper.find(markAllAsIncompleteButton).vm.$emit('click');
+      const dialog = wrapper.find(confirmDialogSelector);
+      expect(dialog.exists()).toBeTruthy();
+    });
+  });
+
   describe('markAllTasksAsIncomplete', () => {
     it('invoke markTaskAsIncomplete for each task', () => {
-      wrapper.find('[data-test="mark-all-tasks-as-incomplete"]').vm.$emit('click');
-
+      wrapper.setData({showConfirmDialog: true});
+      wrapper.find(confirmDialogSelector).vm.$emit('confirm');
       expect(actions.markTaskAsIncomplete).toBeCalledTimes(2);
     });
   });

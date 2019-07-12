@@ -29,7 +29,7 @@
           <v-btn
             color="info"
             small
-            @click="markAllTasksAsIncomplete"
+            @click="openConfirmDialog"
             data-test="mark-all-tasks-as-incomplete"
           >
             <v-icon>check_box_outline_blank</v-icon>
@@ -59,6 +59,15 @@
       </div>
     </div>
 
+    <app-confirm-dialog
+      v-if="showConfirmDialog"
+      title="Uncheck all tasks"
+      message="Do you want mark all tasks as incomplete"
+      @confirm="markAllTasksAsIncomplete"
+      @cancel="hideConfirmDialog"
+      data-test="confirm-dialog"
+    />
+
     <group-delete-dialog
       v-if="showDeleteDialog"
       :group="group"
@@ -83,6 +92,7 @@ export default {
   data() {
     return {
       showDeleteDialog: false,
+      showConfirmDialog: false,
       editing: false,
     };
   },
@@ -108,12 +118,19 @@ export default {
     },
     markAllTasksAsIncomplete() {
       this.tasks.forEach(({id}) => this.markTaskAsIncomplete(id));
+      this.hideConfirmDialog();
     },
     openDeleteDialog() {
       this.showDeleteDialog = true;
     },
     hideDeleteDialog() {
       this.showDeleteDialog = false;
+    },
+    openConfirmDialog() {
+      this.showConfirmDialog = true;
+    },
+    hideConfirmDialog() {
+      this.showConfirmDialog = false;
     },
     enableEdit() {
       this.editing = true;

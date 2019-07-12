@@ -3,4 +3,5 @@ export default {
   AppLoading: '<div />',
   AppNameForm: '<div />',
   AppTitle: '<div />',
+  AppConfirmDialog: '<div />',
 };
