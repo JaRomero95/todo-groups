@@ -85,6 +85,24 @@ const actions = {
     await API.tasks.destroy(taskId);
     commit('deleteTask', taskId);
   },
+  markTaskAsComplete({dispatch}, taskId) {
+    const task = {
+      id: taskId,
+      due: new Date().toISOString(),
+      dueComplete: true
+    };
+
+    dispatch('updateTask', task);
+  },
+  markTaskAsIncomplete({dispatch}, taskId) {
+    const task = {
+      id: taskId,
+      due: '',
+      dueComplete: false
+    };
+
+    dispatch('updateTask', task);
+  },
   async updateTask({commit}, task) {
     const updatedTask = await API.tasks.update(task.id, task);
     commit('updateTask', updatedTask);

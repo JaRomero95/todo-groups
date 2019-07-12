@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupShow renders correctly 1`] = `
+<div>
+  <div>
+    <div>
+      <h2 data-test="group-title" class="headline">
+
+        <v-icon-stub datatest="group-edit" data-test="group-edit">
+          edit
+        </v-icon-stub>
+      </h2>
+      <div class="text-xs-right">
+        <v-btn-stub color="info" activeclass="v-btn--active" tag="button" small="true" type="button" data-test="mark-all-tasks-as-incomplete">
+          <v-icon-stub>check_box_outline_blank</v-icon-stub>
+          Uncheck all tasks
+        </v-btn-stub>
+        <v-btn-stub color="error" activeclass="v-btn--active" tag="button" small="true" type="button" data-test="open-delete-dialog">
+          <v-icon-stub>delete</v-icon-stub>
+          Delete
+        </v-btn-stub>
+      </div>
+      <task-index-stub tasks="[object Object],[object Object]"></task-index-stub>
+    </div>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
