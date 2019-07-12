@@ -27,6 +27,16 @@
 
         <div class="text-xs-right">
           <v-btn
+            color="info"
+            small
+            @click="markAllTasksAsIncomplete"
+            data-test="mark-all-tasks-as-incomplete"
+          >
+            <v-icon>check_box_outline_blank</v-icon>
+            Uncheck all tasks
+          </v-btn>
+
+          <v-btn
             color="error"
             small
             @click="openDeleteDialog"
@@ -91,10 +101,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadGroup', 'deleteGroup']),
+    ...mapActions(['loadGroup', 'deleteGroup', 'markTaskAsIncomplete']),
     async handleDeleteGroup() {
       await this.deleteGroup(this.group.id);
       this.$router.push({name: 'groups-index'});
+    },
+    markAllTasksAsIncomplete() {
+      this.tasks.forEach(({id}) => this.markTaskAsIncomplete(id));
     },
     openDeleteDialog() {
       this.showDeleteDialog = true;
