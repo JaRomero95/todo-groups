@@ -8,11 +8,11 @@ self.__precacheManifest = [
     "url": "/todo-groups/js/chunk-vendors.b19bef7d.js"
   },
   {
-    "revision": "a36a437b0bd03822f1f1",
-    "url": "/todo-groups/js/app.491fa9b4.js"
+    "revision": "430be719edcc295499b3",
+    "url": "/todo-groups/js/app.1d577bd6.js"
   },
   {
-    "revision": "f91663204e0ec809b91b63f31659a069",
+    "revision": "5b2ae9b6c8957f6fc597ba11bb9f2021",
     "url": "/todo-groups/index.html"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/todo-groups/css/chunk-vendors.d7a9a903.css"
   },
   {
-    "revision": "a36a437b0bd03822f1f1",
-    "url": "/todo-groups/css/app.b1025dc1.css"
+    "revision": "430be719edcc295499b3",
+    "url": "/todo-groups/css/app.b82744e1.css"
   }
 ];
