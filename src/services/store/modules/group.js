@@ -22,6 +22,7 @@ const getters = {
 
     return undoneTasks.concat(doneTasks);
   },
+  task: (state, getters) => taskId => getters.tasks.find(task => task.id === taskId),
   loadingGroup(state) {
     return state.loadingGroup;
   },
@@ -103,9 +104,22 @@ const actions = {
 
     dispatch('updateTask', task);
   },
-  async updateTask({commit}, task) {
-    const updatedTask = await API.tasks.update(task.id, task);
-    commit('updateTask', updatedTask);
+  async updateTask({commit, getters}, task) {
+    const actualTask = getters.task(task.id);
+
+    const earlyTask = {
+      ...actualTask,
+      ...task,
+    };
+
+    commit('updateTask', earlyTask);
+
+    try {
+      const updatedTask = await API.tasks.update(task.id, task);
+      commit('updateTask', updatedTask);
+    } catch (e) {
+      commit('updateTask', actualTask);
+    }
   }
 };
 
