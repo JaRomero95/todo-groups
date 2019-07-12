@@ -42,8 +42,11 @@ export default {
     };
   },
   watch: {
-    task() {
-      this.task = {...this.initialValue};
+    initialValue: {
+      deep: true,
+      handler() {
+        this.task = {...this.initialValue}
+      }
     }
   },
   methods: {
