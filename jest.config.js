@@ -24,8 +24,8 @@ module.exports = {
   ],
   testURL: 'http://localhost/',
   watchPlugins: [
-    '/home/romero/workspace/todo-groups/todo-groups/node_modules/jest-watch-typeahead/filename.js',
-    '/home/romero/workspace/todo-groups/todo-groups/node_modules/jest-watch-typeahead/testname.js',
+    'jest-watch-typeahead/filename.js',
+    'jest-watch-typeahead/testname.js',
   ],
   setupFiles: ['<rootDir>/tests/unit/setup.js']
 };
